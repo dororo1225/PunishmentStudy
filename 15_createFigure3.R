@@ -5,6 +5,7 @@ library(tidyverse)
 library(tidybayes)
 library(modelr)
 library(ggpubr)
+library(cowplot)
 
 # read data
 read_csv("data.csv", col_types = "cccdd") %>% 
@@ -43,24 +44,21 @@ d1 %>%
 df_MED1 %>% 
   ggplot(aes(x = trial)) +
   geom_ribbon(aes(ymax = .upper, ymin = .lower, fill = test), alpha = 0.2) +
-  geom_line(aes(y = .epred, color = test), lwd = 1.5) +
-  geom_point(data = df1, aes(y = Prop, color = test), size = 3) +
+  geom_line(aes(y = .epred, color = test)) +
+  geom_point(data = df1, aes(y = Prop, color = test), size = 1) +
   scale_color_viridis_d(begin = 0, end = 0.5, option = "D") +
   scale_fill_viridis_d(begin = 0, end = 0.5, option = "D") +
-  scale_x_continuous(breaks = 1:10)+
+  scale_x_continuous(breaks = 1:10) +
   ylim(0, 1) +
   theme_classic() +
   labs(x = "Trial number", y = "Proportion of selective look\nat an aggressor", color = "Test type", fill = "Test type", tag = "a",
        title = "Punishment") +
   guides(color = "none", fill = "none") +
   theme(panel.grid = element_blank(),
-        plot.title = element_text(size = 21, face = "bold"),
-        plot.tag = element_text(size = 21, face = "bold"),
-        axis.line = element_line(size = 0.75),
-        axis.ticks = element_line(size = 0.75),
-        axis.title = element_text(face = "bold", size = 18),
-        axis.text = element_text(color = "black", size = 12),
-        strip.text = element_text(face = "bold", size = 18))  -> gp1
+        plot.title = element_text(size = 7, face = "bold"),
+        plot.tag = element_text(size = 7, face = "bold"),
+        axis.title = element_text(face = "bold", size = 7),
+        axis.text = element_text(color = "black", size = 6))  -> gp1
 print(gp1)
 
 # Exp.2
@@ -90,8 +88,8 @@ d2 %>%
 df_MED2 %>% 
   ggplot(aes(x = trial)) +
   geom_ribbon(aes(ymax = .upper, ymin = .lower, fill = test), alpha = 0.2) +
-  geom_line(aes(y = .epred, color = test), lwd = 1.5) +
-  geom_point(data = df2, aes(y = Prop, color = test), size = 3) +
+  geom_line(aes(y = .epred, color = test)) +
+  geom_point(data = df2, aes(y = Prop, color = test), size = 1) +
   scale_color_viridis_d(begin = 0, end = 0.5, option = "D") +
   scale_fill_viridis_d(begin = 0, end = 0.5, option = "D") +
   scale_x_continuous(breaks = 1:10)+
@@ -101,13 +99,10 @@ df_MED2 %>%
        title = "Contacting less negative") +
   guides(color = "none", fill = "none") +
   theme(panel.grid = element_blank(),
-        plot.title = element_text(size = 21, face = "bold"),
-        plot.tag = element_text(size = 21, face = "bold"),
-        axis.line = element_line(size = 0.75),
-        axis.ticks = element_line(size = 0.75),
-        axis.title = element_text(face = "bold", size = 18),
-        axis.text = element_text(color = "black", size = 12),
-        strip.text = element_text(face = "bold", size = 18)) -> gp2
+        plot.title = element_text(size = 7, face = "bold"),
+        plot.tag = element_text(size = 7, face = "bold"),
+        axis.title = element_text(face = "bold", size = 7),
+        axis.text = element_text(color = "black", size = 6)) -> gp2
 print(gp2)
 
 # Exp.3
@@ -137,8 +132,8 @@ d3 %>%
 df_MED3 %>% 
   ggplot(aes(x = trial)) +
   geom_ribbon(aes(ymax = .upper, ymin = .lower, fill = test), alpha = 0.2) +
-  geom_line(aes(y = .epred, color = test), lwd = 1.5) +
-  geom_point(data = df3, aes(y = Prop, color = test), size = 3) +
+  geom_line(aes(y = .epred, color = test)) +
+  geom_point(data = df3, aes(y = Prop, color = test), size = 1) +
   scale_color_viridis_d(begin = 0, end = 0.5, option = "D") +
   scale_fill_viridis_d(begin = 0, end = 0.5, option = "D") +
   scale_x_continuous(breaks = 1:10)+
@@ -148,13 +143,10 @@ df_MED3 %>%
        title = "50% reinforcement probability") +
   guides(color = "none", fill = "none") +
   theme(panel.grid = element_blank(),
-        plot.title = element_text(size = 21, face = "bold"),
-        plot.tag = element_text(size = 21, face = "bold"),
-        axis.line = element_line(size = 0.75),
-        axis.ticks = element_line(size = 0.75),
-        axis.title = element_text(face = "bold", size = 18),
-        axis.text = element_text(color = "black", size = 12),
-        strip.text = element_text(face = "bold", size = 18)) -> gp3
+        plot.title = element_text(size = 7, face = "bold"),
+        plot.tag = element_text(size = 7, face = "bold"),
+        axis.title = element_text(face = "bold", size = 7),
+        axis.text = element_text(color = "black", size = 6)) -> gp3
 print(gp3)
 
 # Exp.4
@@ -184,8 +176,8 @@ d4 %>%
 df_MED4 %>% 
   ggplot(aes(x = trial)) +
   geom_ribbon(aes(ymax = .upper, ymin = .lower, fill = test), alpha = 0.2) +
-  geom_line(aes(y = .epred, color = test), lwd = 1.5) +
-  geom_point(data = df4, aes(y = Prop, color = test), size = 3) +
+  geom_line(aes(y = .epred, color = test)) +
+  geom_point(data = df4, aes(y = Prop, color = test), size = 1) +
   scale_color_viridis_d(begin = 0, end = 0.5, option = "D") +
   scale_fill_viridis_d(begin = 0, end = 0.5, option = "D") +
   scale_x_continuous(breaks = 1:10)+
@@ -195,13 +187,10 @@ df_MED4 %>%
        title = "Inanimate agents") +
   guides(color = "none", fill = "none") +
   theme(panel.grid = element_blank(),
-        plot.title = element_text(size = 21, face = "bold"),
-        plot.tag = element_text(size = 21, face = "bold"),
-        axis.line = element_line(size = 0.75),
-        axis.ticks = element_line(size = 0.75),
-        axis.title = element_text(face = "bold", size = 18),
-        axis.text = element_text(color = "black", size = 12),
-        strip.text = element_text(face = "bold", size = 18))  -> gp4
+        plot.title = element_text(size = 7, face = "bold"),
+        plot.tag = element_text(size = 7, face = "bold"),
+        axis.title = element_text(face = "bold", size = 7),
+        axis.text = element_text(color = "black", size = 6)) -> gp4
 print(gp4)
 
 # Exp.5
@@ -231,8 +220,8 @@ d5 %>%
 df_MED5 %>% 
   ggplot(aes(x = trial)) +
   geom_ribbon(aes(ymax = .upper, ymin = .lower, fill = test), alpha = 0.2) +
-  geom_line(aes(y = .epred, color = test), lwd = 1.5) +
-  geom_point(data = df5, aes(y = Prop, color = test), size = 3) +
+  geom_line(aes(y = .epred, color = test)) +
+  geom_point(data = df5, aes(y = Prop, color = test), size = 1) +
   scale_color_viridis_d(begin = 0, end = 0.5, option = "D") +
   scale_fill_viridis_d(begin = 0, end = 0.5, option = "D") +
   scale_x_continuous(breaks = 1:10)+
@@ -242,39 +231,29 @@ df_MED5 %>%
        title = "Replication of Exp.1") +
   guides(color = "none", fill = "none") +
   theme(panel.grid = element_blank(),
-        plot.title = element_text(size = 21, face = "bold"),
-        plot.tag = element_text(size = 21, face = "bold"),
-        axis.line = element_line(size = 0.75),
-        axis.ticks = element_line(size = 0.75),
-        axis.title = element_text(face = "bold", size = 18),
-        axis.text = element_text(color = "black", size = 12),
-        strip.text = element_text(face = "bold", size = 18)) -> gp5
+        plot.title = element_text(size = 7, face = "bold"),
+        plot.tag = element_text(size = 7, face = "bold"),
+        axis.title = element_text(face = "bold", size = 7),
+        axis.text = element_text(color = "black", size = 6)) -> gp5
 print(gp5)
 
 # legend
 ggplot(df1,aes(x = trial)) +
-  geom_point(size = 3, aes(y = Prop, color = test)) +
-  geom_line(aes(y = Prop, color = test), lwd = 1.5) +
+  geom_point(size = 1, aes(y = Prop, color = test)) +
+  geom_line(aes(y = Prop, color = test)) +
   scale_color_viridis_d(begin = 0, end = 0.5, option = "D") +
   scale_fill_viridis_d(begin = 0, end = 0.5, option = "D") +
   theme_bw() +
   theme(panel.grid = element_blank(),
-        plot.tag = element_text(size = 21, face = "bold"),
-        axis.line = element_line(size = 0.75),
-        axis.ticks = element_line(size = 0.75),
-        axis.title = element_text(face = "bold", size = 18),
-        # axis.title.y = element_text(vjust = 1.5),
-        axis.text = element_text(color = "black", size = 12),
-        strip.text = element_text(face = "bold", size = 18),
         legend.position = c(1, 1),
         legend.justification = c(0.1, 0.5),
-        legend.box.background = element_rect(size = 1.2),
-        legend.key.size = unit(1.2, "cm"),
-        legend.title = element_text(face = "bold", size = 21),
-        legend.text = element_text(size = 21)) -> gp_legend
-gp_leg <- get_legend(gp_legend, position = "left")
-as_ggplot(gp_leg)
+        legend.box.background = element_rect(),
+        legend.key.size = unit(0.5, "cm"),
+        legend.title = element_text(face = "bold", size = 7),
+        legend.text = element_text(size = 7)) #-> gp_legend
+gp_leg <- ggpubr::get_legend(gp_legend, position = "left")
+as_ggplot(gp_leg) 
 
 # Figure 3
-ggarrange(gp1, gp2, gp3, gp4, gp5, gp_leg, ncol = 3, nrow = 2) %>%
-  ggexport(filename = here("Figures", "Figure3.jpg"), width = 5000, height = 2500, res = 300)
+plot_grid(gp1, gp2, gp3, gp4, gp5, gp_leg, ncol = 3, nrow = 2) %>% 
+  save_plot(here("Figures", "Figure3.pdf"), plot = ., units = c("mm"), base_width = 180, base_height = 100)

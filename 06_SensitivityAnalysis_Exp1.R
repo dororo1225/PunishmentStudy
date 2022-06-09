@@ -64,7 +64,7 @@ for (i in 1:length(sd_priors)){
                  family = bernoulli(link = "logit"),
                  warmup = 1000,
                  iter = 11000,
-                 prior = prior(cauchy(0, 1/sqrt(2)), class = b),
+                 prior = prior(target_prior, class = b),
                  cores = 4,
                  save_pars = save_pars(all = TRUE))
   
@@ -147,6 +147,7 @@ df_SA %>%
   geom_point(size = 3) +
   geom_smooth(se = FALSE, lwd = 1) +
   labs(x = "Scaling factor of the Cauchy prior", y = "Bayes factor") +
+  scale_color_viridis_d(option = "A", begin = 0.25, end = 0.7) +
   theme(axis.title = element_text(size = 15, face = "bold"),
         axis.text = element_text(size = 12, color = "black"),
         legend.title = element_text(size = 15, face = "bold"),

@@ -4,7 +4,7 @@ Third-party punishment by infants
 ## Overview
 This repository includes the R codes and dataset for the following paper:
 
-Authors masked. (Under review). Third-party punishment by preverbal infants
+Kanakogi, Y., Miyazaki, M., Takahashi, H., Yamamoto, H., Kobayashi, T., & Hiraki, K. (2022). Third-party punishment by preverbal infants. Nature Human Behaviour. https://doi.org/10.1038/s41562-022-01354-2
 
 ## Description
 This repository consists of 2 folders, 2 csv files, and 18 R scripts. Some R scripts output figures and csv files are shown in the folders ‘Figures’ and ‘Results’, respectively.
@@ -95,4 +95,4 @@ A simple folder structure.csv files is shown below:
 
 
 ## The Author of this README File
-- [Author masked]
+- [Hiroki Yamamoto](https://github.com/dororo1225)

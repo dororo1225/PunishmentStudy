@@ -101,7 +101,7 @@ tibble(thr = c(1/500, 1/100, 1/30, 1/10, 1/3, 1, 3, 10, 40),
 df_thr %>% 
   mutate(thr_log_lag = lag(thr_log),
          lbl_pos = (thr_log + thr_log_lag)/2,
-         label = c(NA_character_, "Extreame", "Very Strong", "Strong", "Moderate", "Anecdotal", "Anecdotal", "Moderate", "Strong")) %>% 
+         label = c(NA_character_, "Extreme", "Very Strong", "Strong", "Moderate", "Anecdotal", "Anecdotal", "Moderate", "Strong")) %>% 
   filter(!is.na(label)) -> df_label
 
 df_thr %>% 
@@ -109,43 +109,44 @@ df_thr %>%
 
 df_BF %>% 
   ggplot(aes(x = scale, y = log(BF_incl), color = Effects)) +
-  facet_wrap(~Exp) +
+  facet_wrap(~Exp, ncol = 3) +
   geom_hline(data = df_thr, aes(yintercept = thr_log), lty = 3) +
   geom_hline(yintercept = 0, lty = 2) +
   scale_y_continuous(breaks = df_label$lbl_pos,
                      labels = df_label$label,
                      position = "right",
-                     limits = c(min(log(df_BF$BF_incl)) - 0.2, max(log(df_BF$BF_incl)) + 0.5)) +
+                     limits = c(min(log(df_BF$BF_incl)), max(log(df_BF$BF_incl)) + 0.4)) +
   labs(x = "", y = "") +
   theme_bw() +
   theme(panel.grid = element_blank(),
-        axis.title = element_text(size = 15, face = "bold"),
-        axis.text = element_text(size = 12, color = "black"),
-        strip.text = element_text(size = 15, face = "bold"),
-        legend.title = element_text(size = 15, face = "bold"),
-        legend.text = element_text(size = 12),
+        axis.text = element_text(size = 7, color = "black"),
+        strip.text = element_text(size = 7, face = "bold"),
+        legend.title = element_text(size = 7, face = "bold"),
+        legend.text = element_text(size = 7),
         legend.position = "top") -> dp1
 
 df_BF %>% 
   ggplot(aes(x = scale, y = log(BF_incl))) +
-  geom_smooth(aes(color = Effects), se = FALSE, lwd = 1) +
-  geom_point(aes(color = Effects)) +
-  geom_point(data = df_default, aes(x = 1/sqrt(2), fill = Effects), size = 3, shape = 21) +
+  geom_smooth(aes(color = Effects), se = FALSE, lwd = 0.75) +
+  geom_point(aes(color = Effects), size = 1) +
+  geom_point(data = df_default, aes(x = 1/sqrt(2), fill = Effects), size = 2, shape = 21) +
   labs(x = "Scaling factor of the Cauchy prior", y = "log(Inclusion Bayes factor)") +
+  scale_color_viridis_d(option = "A", begin = 0.25, end = 0.7) +
+  scale_fill_viridis_d(option = "A", begin = 0.25, end = 0.7) +
   scale_y_continuous(breaks = log(c(1/100, 1/30, 1/10, 1/3, 1, 3, 10)),
                      labels = c("log(1/100)", "log(1/30)", "log(1/10)", "log(1/3)", "0", "log(3)", "log(10)"),
-                     limits = c(min(log(df_BF$BF_incl)) - 0.2, max(log(df_BF$BF_incl)) + 0.5)) +
-  facet_wrap(~Exp) +
+                     limits = c(min(log(df_BF$BF_incl)), max(log(df_BF$BF_incl)) + 0.4)) +
+  facet_wrap(~Exp, ncol = 3) +
   theme_half_open() +
   theme(panel.grid = element_blank(),
-        axis.title = element_text(size = 15, face = "bold"),
-        axis.text = element_text(size = 12, color = "black"),
-        strip.text = element_text(size = 15, face = "bold"),
-        legend.title = element_text(size = 15, face = "bold"),
-        legend.text = element_text(size = 12),
+        axis.title = element_text(size = 7, face = "bold"),
+        axis.text = element_text(size = 7, color = "black"),
+        strip.text = element_text(size = 7, face = "bold"),
+        legend.title = element_text(size = 7, face = "bold"),
+        legend.text = element_text(size = 7),
         legend.position = "top")  -> dp2
 
 aligned_plots <- align_plots(dp1, dp2, align = "hv", axis = "tblr")
 gp <- ggdraw(aligned_plots[[1]]) + draw_plot(aligned_plots[[2]])
 print(gp)
-save_plot(here("Figures", "Figure2.jpg"), gp, base_width = 12, base_height = 8)
+save_plot(here("Figures", "Figure2.pdf"), gp, units = c("mm"), base_width = 180, base_height = 130)
